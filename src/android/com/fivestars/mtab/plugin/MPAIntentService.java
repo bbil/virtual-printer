@@ -29,8 +29,6 @@ public class MPAIntentService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		Log.d("virtualPrinter", "MPAIntentService started");
-
 		isFinishing = false;
 
 		final Thread wifiCheck = new Thread() {
@@ -52,6 +50,11 @@ public class MPAIntentService extends IntentService {
 						MainActivity.log("WiFi Disabled! Killing threads @ "
 								+ new SimpleDateFormat("yyyyMMdd_HHmss")
 										.format(new Date()));*/
+						
+						Log.d("VirtualPrinter", "WiFi Disabled! Killing threads @ "
+								+ new SimpleDateFormat("yyyyMMdd_HHmss")
+										.format(new Date()));
+						
 						wifiDisabled = true;
 						firstCall = true;
 						if (mp.isRunning()) {
@@ -80,6 +83,10 @@ public class MPAIntentService extends IntentService {
 													"yyyyMMdd_HHmss")
 													.format(new Date()));
 													*/
+							Log.d("VirtualPrinter", "WiFi Enabled! Starting Threads @ "
+											+ new SimpleDateFormat(
+													"yyyyMMdd_HHmss")
+													.format(new Date()));
 							wifiDisabled = false;
 							firstCall = false;
 							if (!mp.isRunning()) {
@@ -94,6 +101,9 @@ public class MPAIntentService extends IntentService {
 							MainActivity.log("Starting threads @ "
 									+ new SimpleDateFormat("yyyyMMdd_HHmss")
 											.format(new Date()));*/
+							Log.d("VirtualPrinter", "Starting threads @ "
+									+ new SimpleDateFormat("yyyyMMdd_HHmss")
+											.format(new Date()));
 							firstCall = false;
 							mockPrinter.start();
 							virtualPrinter.start();
@@ -112,6 +122,8 @@ public class MPAIntentService extends IntentService {
 		/*
 		MainActivity.log("Service started @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Service started @ "
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()))
 		wifiCheck.start();
 	}
 

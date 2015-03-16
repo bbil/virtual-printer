@@ -41,6 +41,8 @@ public class ReceiptCapturer implements Runnable {
 		/*
 		MainActivity.log("Killing Receipt Capturer Thread @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Killing Receipt Capturer Thread @ "
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 		shouldRun = false;
 
 		if (server != null && !server.isClosed()) {
@@ -64,6 +66,8 @@ public class ReceiptCapturer implements Runnable {
 		/*
 		MainActivity.log("Restarting Receipt Capturer Thread @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Restarting Receipt Capturer Thread @ "
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 		if (error_count >= 5) {
 			service.restartService();
 			return;
@@ -87,6 +91,7 @@ public class ReceiptCapturer implements Runnable {
 			server.setReceiveBufferSize(7300);
 		} catch (IOException e) {
 			//MainActivity.log(e.toString() + " " + e.getMessage());
+			Log.d("VirtualPrinter", e.toString() + " " + e.getMessage());
 			restart();
 			return;
 		}
@@ -94,6 +99,8 @@ public class ReceiptCapturer implements Runnable {
 		/*
 		MainActivity.log("Connect to port 9100 @"
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Connect to port 9100 @"
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 
 		while (shouldRun) {
 			popupCalled = false;
@@ -103,6 +110,7 @@ public class ReceiptCapturer implements Runnable {
 				client = server.accept();
 			} catch (IOException e) {
 				//MainActivity.log(e.toString() + " " + e.getMessage());
+				Log.d("VirtualPrinter", e.toString() + " " + e.getMessage());
 				restart();
 				return;
 			}
@@ -112,6 +120,9 @@ public class ReceiptCapturer implements Runnable {
 					.log("Accepted TCP Connection @"
 							+ new SimpleDateFormat("yyyyMMdd_HHmss")
 									.format(new Date()));*/
+			Log.d("VirtualPrinter", "Accepted TCP Connection @"
+							+ new SimpleDateFormat("yyyyMMdd_HHmss")
+									.format(new Date()))
 
 			processInput(client);
 
@@ -119,6 +130,8 @@ public class ReceiptCapturer implements Runnable {
 				server.setSoTimeout(1000);
 			} catch (SocketException e) {
 				//MainActivity.log(e.toString() + " " + e.getMessage() + " @ "+  new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
+				Log.d("VirtualPrinter", e.toString() + " " + e.getMessage() + " @ "
+					+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 			}
 
 			do {
@@ -128,9 +141,13 @@ public class ReceiptCapturer implements Runnable {
 					MainActivity.log("Accepted Intermediate TCP Connection @"
 							+ new SimpleDateFormat("yyyyMMdd_HHmss")
 									.format(new Date()));*/
+					Log.d("VirtualPrinter", "Accepted Intermediate TCP Connection @"
+							+ new SimpleDateFormat("yyyyMMdd_HHmss")
+									.format(new Date()));
 					processInput(client);
 				} catch (IOException e) {
 					//MainActivity.log("TIMEOUT " + e.toString() + " @ "+  new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
+					Log.d("VirtualPrinter", "TIMEOUT " + e.toString() + " @ "+  new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 					client = null;
 				}
 				intermediateSteps++;
@@ -146,13 +163,21 @@ public class ReceiptCapturer implements Runnable {
 				/*MainActivity.log("Launched Popup due to Order Ticket TCP @"
 						+ new SimpleDateFormat("yyyyMMdd_HHmss")
 								.format(new Date()));*/
-				callServer();
+				Log.d("VirtualPrinter", "Launched Popup due to Order Ticket TCP @"
+						+ new SimpleDateFormat("yyyyMMdd_HHmss")
+								.format(new Date()));
+				//callServer();
+
+				Intent intent = new Intent(VirtualPrinter.ACTION_RECEIPT_READ);
+				//ToDo (bbil): Send receipt data as well
+				service.sendBroadcast(intent);
 			}
 
 			try {
 				server.setSoTimeout(0);
 			} catch (SocketException e2) {
 				//MainActivity.log(e2.toString() + " " + e2.getMessage() + " @ "+  new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
+				Log.d("VirtualPrinter", e2.toString() + " " + e2.getMessage() + " @ "+  new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 			}
 		}
 	}
@@ -161,6 +186,8 @@ public class ReceiptCapturer implements Runnable {
 		/*
 		MainActivity.log("Processing TCP Input @"
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Processing TCP Input @"
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 
 		InputStream inp = null;
 
@@ -168,6 +195,7 @@ public class ReceiptCapturer implements Runnable {
 			inp = client.getInputStream();
 		} catch (IOException e) {
 			//MainActivity.log(e.toString() + " " + e.getMessage());
+			Log.d("VirtualPrinter", e.toString() + " " + e.getMessage());
 			restart();
 			return;
 		}
@@ -187,6 +215,9 @@ public class ReceiptCapturer implements Runnable {
 					.log("Launched Popup due to Receipt TCP @"
 							+ new SimpleDateFormat("yyyyMMdd_HHmss")
 									.format(new Date()));*/
+			Log.d("VirtualPrinter", "Launched Popup due to Receipt TCP @"
+							+ new SimpleDateFormat("yyyyMMdd_HHmss")
+									.format(new Date()));
 			popupCalled = true;
 			//callServer();
 
@@ -214,6 +245,8 @@ public class ReceiptCapturer implements Runnable {
 		/*
 		MainActivity.log("Finished Processing Input @"
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Finished Processing Input @"
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 
 	}
 
@@ -227,19 +260,24 @@ public class ReceiptCapturer implements Runnable {
 			httpclient.execute(request);
 		} catch (URISyntaxException e) {
 			//MainActivity.log(e.toString() + " " + e.getMessage());
+			Log.d("VirtualPrinter", e.toString() + " " + e.getMessage());
 			restart();
 			return;
 		} catch (ClientProtocolException e) {
 			//MainActivity.log(e.toString() + " " + e.getMessage());
+			Log.d("VirtualPrinter", e.toString() + " " + e.getMessage());
 			restart();
 			return;
 		} catch (IOException e) {
 			//MainActivity.log(e.toString() + " " + e.getMessage());
+			Log.d("VirtualPrinter", e.toString() + " " + e.getMessage());
 			restart();
 			return;
 		}
 		/*
 		MainActivity.log("Made call to Heroku Server @"
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
+		Log.d("VirtualPrinter", "Made call to Heroku Server @"
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 	}
 }
