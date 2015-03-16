@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import android.util.Log;
+
 public class MPAIntentService extends IntentService {
 
 	static boolean isFinishing = false;
@@ -25,6 +27,9 @@ public class MPAIntentService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
+
+		Log.d("virtualPrinter", "MPAIntentService started");
+
 		isFinishing = false;
 
 		final Thread wifiCheck = new Thread() {
