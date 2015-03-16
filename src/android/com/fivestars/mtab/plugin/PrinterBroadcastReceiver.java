@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 
-public class PrinterBroadcastReciever extends BroadcastReceiver{
+public class PrinterBroadcastReceiver extends BroadcastReceiver{
     private CallbackContext callbackContext;
     private Activity activity;
     private boolean[] permissionCount;

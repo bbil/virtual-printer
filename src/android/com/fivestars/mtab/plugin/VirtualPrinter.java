@@ -23,7 +23,7 @@ public class VirtualPrinter extends CordovaPlugin {
 
     public static final String ACTION_RECEIPT_READ = "receiptRead";
 
-    private static Intent serviceIntent = new Intent(cordova.getActivity.getApplicationContext(), MPAIntentService.class);;
+    private static Intent serviceIntent;
 
     private BroadcastReceiver mReceiver;
     
@@ -52,7 +52,7 @@ public class VirtualPrinter extends CordovaPlugin {
         return false;
     }
 
-    private void registerReadCallback(CallbackContext callbackContext) {
+    private void registerReadCallback(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 readCallback = callbackContext;
@@ -69,7 +69,7 @@ public class VirtualPrinter extends CordovaPlugin {
             public void run() {
                 //Start the service with an Intent, register a BroadcastReceiver
 
-                
+                serviceIntent= new Intent(cordova.getActivity().getApplicationContext(), MPAIntentService.class);
 
                 mReceiver = new BroadcastReceiver() {
                     @Override
