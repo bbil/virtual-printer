@@ -23,7 +23,7 @@ public class VirtualPrinter extends CordovaPlugin {
 
     public static final String ACTION_RECEIPT_READ = "receiptRead";
 
-    private Intent serviceIntent;
+    private static Intent serviceIntent = new Intent(cordova.getActivity.getApplicationContext(), MPAIntentService.class);;
 
     private BroadcastReceiver mReceiver;
     
@@ -52,7 +52,7 @@ public class VirtualPrinter extends CordovaPlugin {
         return false;
     }
 
-    private void registerReadCallback(CallbackContext callback) {
+    private void registerReadCallback(CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 readCallback = callbackContext;
@@ -64,12 +64,12 @@ public class VirtualPrinter extends CordovaPlugin {
         });
     }
 
-    private void init(CallbackContext callback) {
+    private void init(final CallbackContext callback) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 //Start the service with an Intent, register a BroadcastReceiver
 
-                serviceIntent = new Intent(cordova.getActivity(), MPAIntentService.class);
+                
 
                 mReceiver = new BroadcastReceiver() {
                     @Override
@@ -89,8 +89,8 @@ public class VirtualPrinter extends CordovaPlugin {
                 Context context = cordova.getActivity().getApplicationContext();
 
                 IntentFilter intentFilter = new IntentFilter();
-                filter.addAction(ACTION_RECEIPT_READ);
-                context.registerReceiver(mReceiver, new IntentFilter());
+                intentFilter.addAction(ACTION_RECEIPT_READ);
+                context.registerReceiver(mReceiver, intentFilter;
 
                 context.startService(serviceIntent);
 
@@ -100,12 +100,5 @@ public class VirtualPrinter extends CordovaPlugin {
 
             }
         });
-    }
-
-    public static void restartService() {
-        Context context = cordova.getActivity().getApplicationContext();
-
-        context.stopService(serviceIntent);
-        context.startService(serviceIntent);
     }
 }

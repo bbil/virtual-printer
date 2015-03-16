@@ -25,6 +25,12 @@ public class MockPrinter implements Runnable {
 
 	private int error_count = 0;
 
+	private MPAIntentService service;
+
+	public MockPrinter(MPAIntentService service) {
+		this.service = service;
+	}
+
 	/*
 	 * hardcoded msg we want to send out to make sure we are detected as a
 	 * printer in Square
@@ -49,7 +55,7 @@ public class MockPrinter implements Runnable {
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
 
 		if (error_count >= 5) {
-			VirtualPrinter.restartService();
+			service.restartService();
 			return;
 		}
 		terminate();

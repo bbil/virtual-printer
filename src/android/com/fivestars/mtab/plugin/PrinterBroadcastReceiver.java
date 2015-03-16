@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 
-public class UsbBroadcastReceiver extends BroadcastReceiver{
+public class PrinterBroadcastReciever extends BroadcastReceiver{
     private CallbackContext callbackContext;
     private Activity activity;
     private boolean[] permissionCount;
@@ -20,14 +20,14 @@ public class UsbBroadcastReceiver extends BroadcastReceiver{
      
     private static final String ACTION_PRINT_RECEIVED = "print_received";
     
-    public UsbBroadcastReceiver(CallbackContext callbackContext, Activity activity) {
+    public PrinterBroadcastReciever(CallbackContext callbackContext, Activity activity) {
         this.callbackContext = callbackContext;
         this.activity = activity;
     }
      
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        Bundle extras = intent.getExtras();
+        //Bundle extras = intent.getExtras();
         if (ACTION_PRINT_RECEIVED.equals(action)) {
              synchronized (this) {
 

@@ -12,7 +12,7 @@ import android.net.NetworkInfo;
 public class MPAIntentService extends IntentService {
 
 	static boolean isFinishing = false;
-	final MockPrinter mp = new MockPrinter();
+	final MockPrinter mp;
 	final ReceiptCapturer rc;
 	final int TIME_TO_SLEEP = 1000;
 
@@ -20,6 +20,7 @@ public class MPAIntentService extends IntentService {
 		super("MPAIntentService");
 
 		rc = new ReceiptCapturer(this);
+		mp = new MockPrinter(this);
 	}
 
 	@Override
@@ -112,5 +113,13 @@ public class MPAIntentService extends IntentService {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		onHandleIntent(intent);
 		return START_STICKY;
+	}
+
+	public void restartService() {
+		Context context = this.getApplicationContext();
+
+		Intent intent = new Intent(context, MPAIntentService.class);
+		context.stopService(intent);
+		context.startService(intent);
 	}
 }

@@ -65,7 +65,7 @@ public class ReceiptCapturer implements Runnable {
 		MainActivity.log("Restarting Receipt Capturer Thread @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
 		if (error_count >= 5) {
-			VirtualPrinter.restartService();
+			service.restartService();
 			return;
 		}
 		error_count++;
