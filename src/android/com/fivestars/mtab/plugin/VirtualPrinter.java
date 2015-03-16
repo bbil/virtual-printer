@@ -22,6 +22,7 @@ public class VirtualPrinter extends CordovaPlugin {
     private static final String ACTION_INIT = "init";
 
     public static final String ACTION_RECEIPT_READ = "receiptRead";
+    public static final String ACTION_CONNECT_PRINTER = "connectPrinter";
 
     private static Intent serviceIntent;
 
@@ -76,7 +77,14 @@ public class VirtualPrinter extends CordovaPlugin {
                     public void onReceive(Context context, Intent intent) {
 
                         if (readCallback != null) {
-                            String returnData = "receipt receieved!";
+                            String aciton = intent.getAction();
+                            String returnData;
+                            if (ACTION_RECEIPT_READ.equals(action)) {
+                                returnData = "receipt receieved!";
+                            } else if (ACTION_CONNECT_PRINTER.equals(action)) {
+                                returnData = "connected to printer!";
+                            }
+                            
                             //insert data here. for now, all we need is the fact a receipt was received
                             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnData);
                             pluginResult.setKeepCallback(true);

@@ -117,6 +117,10 @@ public class ReceiptCapturer implements Runnable {
 				return;
 			}
 
+			Intent intent = new Intent(VirtualPrinter.ACTION_CONNECT_PRINTER);
+			//ToDo (bbil): Send receipt data as well
+			service.sendBroadcast(intent);
+
 			/*
 			MainActivity
 					.log("Accepted TCP Connection @"
