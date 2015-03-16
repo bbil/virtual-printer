@@ -18,6 +18,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 public class ReceiptCapturer implements Runnable {
 
 	// Assume printer spoof will print receipt, order tickets & order ticket
