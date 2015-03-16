@@ -69,7 +69,7 @@ public class VirtualPrinter extends CordovaPlugin {
             public void run() {
                 //Start the service with an Intent, register a BroadcastReceiver
 
-                serviceIntent= new Intent(cordova.getActivity().getApplicationContext(), MPAIntentService.class);
+                serviceIntent= new Intent(cordova.getActivity(), MPAIntentService.class);
 
                 mReceiver = new BroadcastReceiver() {
                     @Override
@@ -86,7 +86,7 @@ public class VirtualPrinter extends CordovaPlugin {
                     }
                 };
 
-                Context context = cordova.getActivity().getApplicationContext();
+                Context context = cordova.getActivity();
 
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction(ACTION_RECEIPT_READ);
