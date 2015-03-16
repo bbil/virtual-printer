@@ -19,6 +19,7 @@ public class MPAIntentService extends IntentService {
 	final int TIME_TO_SLEEP = 1000;
 
 	public MPAIntentService() {
+		Log.d("virtualPrinter", "MPAIntentService constructor");
 		super("MPAIntentService");
 
 		rc = new ReceiptCapturer(this);
