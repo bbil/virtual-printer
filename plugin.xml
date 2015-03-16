@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="com.fivestars.mtab.plugin.VirtualPrinter"
+    version="0.0.1">
+    <name>VirtualPrinterPlugin</name>
+    <description>Cordova plugin to intercept print jobs from iPad POS</description>
+    <license>MIT</license>
+    <keywords>ACR122, phonegap plugin, android</keywords>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="VirtualPrinter">
+                <param name="android-package" value="com.fivestars.mtab.plugin.VirtualPrinter"/>
+            </feature>
+        </config-file>
+        <source-file src="src/android/com/fivestars/mtab/plugin/MockPrinter.java" target-dir="src/com/fivestars/mtab/plugin" />
+        <source-file src="src/android/com/fivestars/mtab/plugin/MPAIntentService.java" target-dir="src/com/fivestars/mtab/plugin" />
+        <source-file src="src/android/com/fivestars/mtab/plugin/PrinterBroadcastReceiver.java" target-dir="src/com/fivestars/mtab/plugin" />
+        <source-file src="src/android/com/fivestars/mtab/plugin/ReceiptCapturer.java" target-dir="src/com/fivestars/mtab/plugin" />
+        <source-file src="src/android/com/fivestars/mtab/plugin/VirtualPrinter.java" target-dir="src/com/fivestars/mtab/plugin" />
+    </platform>
+</plugin>

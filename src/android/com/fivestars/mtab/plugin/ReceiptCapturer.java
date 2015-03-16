@@ -1,4 +1,4 @@
-package com.fivestars.mtab.printer.plugin;
+package com.fivestars.mtab.plugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;

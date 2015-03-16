@@ -1,4 +1,4 @@
-package com.fivestars.mtab.printer.plugin;
+package com.fivestars.mtab.plugin;
 
 import android.app.Activity;
 import android.app.PendingIntent;
