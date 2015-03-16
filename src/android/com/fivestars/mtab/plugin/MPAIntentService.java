@@ -117,6 +117,7 @@ public class MPAIntentService extends IntentService {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.d("virtualPrinter", "MPAIntentService started");
 		onHandleIntent(intent);
 		return START_STICKY;
 	}

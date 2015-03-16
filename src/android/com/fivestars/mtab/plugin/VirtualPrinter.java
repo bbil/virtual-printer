@@ -86,6 +86,8 @@ public class VirtualPrinter extends CordovaPlugin {
                     }
                 };
 
+                Log.d("VirtualPrinter", "init printer");
+
                 Context context = cordova.getActivity();
 
                 IntentFilter intentFilter = new IntentFilter();
