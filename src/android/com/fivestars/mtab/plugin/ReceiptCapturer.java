@@ -122,7 +122,7 @@ public class ReceiptCapturer implements Runnable {
 									.format(new Date()));*/
 			Log.d("VirtualPrinter", "Accepted TCP Connection @"
 							+ new SimpleDateFormat("yyyyMMdd_HHmss")
-									.format(new Date()))
+									.format(new Date()));
 
 			processInput(client);
 

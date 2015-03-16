@@ -123,7 +123,7 @@ public class MPAIntentService extends IntentService {
 		MainActivity.log("Service started @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));*/
 		Log.d("VirtualPrinter", "Service started @ "
-				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()))
+				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 		wifiCheck.start();
 	}
 
