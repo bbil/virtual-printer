@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -101,7 +102,7 @@ public class VirtualPrinter extends CordovaPlugin {
         });
     }
 
-    private static void restartService() {
+    public static void restartService() {
         Context context = cordova.getActivity().getApplicationContext();
 
         context.stopService(serviceIntent);
