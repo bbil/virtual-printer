@@ -100,6 +100,7 @@ public class VirtualPrinter extends CordovaPlugin {
 
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction(ACTION_RECEIPT_READ);
+                intentFilter.addAction(ACTION_CONNECT_PRINTER);
                 context.registerReceiver(mReceiver, intentFilter);
 
                 context.startService(serviceIntent);
