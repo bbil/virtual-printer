@@ -76,9 +76,9 @@ public class VirtualPrinter extends CordovaPlugin {
                     public void onReceive(Context context, Intent intent) {
 
                         if (readCallback != null) {
-                            JSONObject returnObj = new JSONObject();
+                            String returnData = "receipt receieved!";
                             //insert data here. for now, all we need is the fact a receipt was received
-                            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
+                            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnData);
                             pluginResult.setKeepCallback(true);
                             readCallback.sendPluginResult(pluginResult);
                         }
