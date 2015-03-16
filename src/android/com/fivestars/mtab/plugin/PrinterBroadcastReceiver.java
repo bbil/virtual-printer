@@ -20,7 +20,7 @@ public class PrinterBroadcastReceiver extends BroadcastReceiver{
      
     private static final String ACTION_PRINT_RECEIVED = "print_received";
     
-    public PrinterBroadcastReciever(CallbackContext callbackContext, Activity activity) {
+    public PrinterBroadcastReceiver(CallbackContext callbackContext, Activity activity) {
         this.callbackContext = callbackContext;
         this.activity = activity;
     }
