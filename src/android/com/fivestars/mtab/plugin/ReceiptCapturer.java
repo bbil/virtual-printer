@@ -38,7 +38,7 @@ public class ReceiptCapturer implements Runnable {
 	}
 
 	public void terminate() {
-		Log.d("VirtualPrinter", "VirtualPrinter", "Killing Receipt Capturer Thread @ "
+		Log.d("VirtualPrinter", "Killing Receipt Capturer Thread @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 		shouldRun = false;
 
@@ -60,7 +60,7 @@ public class ReceiptCapturer implements Runnable {
 	}
 
 	public void restart() {
-		Log.d("VirtualPrinter", "VirtualPrinter", "Restarting Receipt Capturer Thread @ "
+		Log.d("VirtualPrinter", "Restarting Receipt Capturer Thread @ "
 				+ new SimpleDateFormat("yyyyMMdd_HHmss").format(new Date()));
 		if (error_count >= 5) {
 			service.restartService();
