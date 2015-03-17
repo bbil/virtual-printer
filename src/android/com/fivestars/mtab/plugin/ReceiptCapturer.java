@@ -111,9 +111,6 @@ public class ReceiptCapturer implements Runnable {
 							+ new SimpleDateFormat("yyyyMMdd_HHmss")
 									.format(new Date()));
 
-			Intent intentConnect = new Intent(VirtualPrinter.ACTION_RECEIPT_READ);
-			service.sendBroadcast(intentConnect);
-
 			processInput(client);
 
 			try {
