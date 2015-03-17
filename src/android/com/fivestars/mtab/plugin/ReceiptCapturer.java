@@ -11,9 +11,7 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;Intent intent = new Intent(VirtualPrinter.ACTION_RECEIPT_READ);
-			//ToDo (bbil): Send receipt data as well
-			service.sendBroadcast(intent);
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
