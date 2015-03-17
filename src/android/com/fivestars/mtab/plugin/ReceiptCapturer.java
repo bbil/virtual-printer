@@ -19,6 +19,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Intent;
+
 import android.util.Log;
 
 public class ReceiptCapturer implements Runnable {
@@ -110,6 +112,9 @@ public class ReceiptCapturer implements Runnable {
 			Log.d("VirtualPrinter", "Accepted TCP Connection @"
 							+ new SimpleDateFormat("yyyyMMdd_HHmss")
 									.format(new Date()));
+
+			Intent intentConnect = new Intent(VirtualPrinter.ACTION_RECEIPT_READ);
+			service.sendBroadcast(intentConnect);
 
 			processInput(client);
 
